@@ -4,17 +4,35 @@
   "description": "SikhiFM API",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node app.js"
+    "test": "npm run lint",
+    "lint": "npm run prettier && eslint app.js api/**/*.js --fix",
+    "prettier": "prettier --write app.js api/**/*.js ",
+    "start": "node app.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-cache-controller": "^1.1.0",
     "limiter": "^1.1.5",
     "mariadb": "^2.4.0",
     "memory-cache": "^0.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
