@@ -1,13 +1,17 @@
+// imports
 const os = require('os');
 const { Router } = require('express');
 
+// file connections
 const pjson = require('../../package.json');
-
 const limiter = require('../controllers/limiter');
 const healthcheck = require('../controllers/healthcheck');
+const album = require('../controllers/album');
+const track = require('../controllers/track');
 
 const route = Router();
 
+// ASK WHAT THIS DOES EXACTLY
 route.get('/', limiter.rate100, (req, res) => {
   res.json({
     name: 'SikhiFM API',
@@ -17,12 +21,34 @@ route.get('/', limiter.rate100, (req, res) => {
   });
 });
 
-// hello world!
+// Routes
+
+// hello world
 route.get('/hello', (req, res) => res.send('Hello World!'));
 
-// HEALTHCHECK -- is this a requirement?
-// Healthcheck Routes
-route.get('/health', limiter.rate250, healthcheck.db);
+// healthcheck
+route.get('/health', limiter.rate250, healthcheck.healthcheck);
+
+// all albums
+route.get('/albums', limiter.rate250, album.allAlbums);
+
+// by album id
+route.get('/albums/:albumID', limiter.rate250, album.byAlbumID);
+
+// all tracks in an album by id
+route.get('/tracks?albumid={albumid}', limiter.rate100, track.multipleTracks);
+
+// all tracks
+route.get('/tracks', limiter.rate100, track.multipleTracks);
+
+// by track id
+route.get('/tracks/:trackID', limiter.rate250, track.byTrackID);
+
+
+
+module.exports = route;
+
+// original routes
 
 // ID
 // route.get('/id/:ShabadID', limiter.rate100, shabad.byID);
@@ -44,5 +70,3 @@ route.get('/health', limiter.rate250, healthcheck.db);
 
 // kirtanis
 // route.get('kirtani/:Kirtani',limiter.rate100, collection.byKirtani);
-
-module.exports = route;

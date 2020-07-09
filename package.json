@@ -17,9 +17,9 @@
     "express": "^4.17.1",
     "express-cache-controller": "^1.1.0",
     "limiter": "^1.1.5",
-    "mariadb": "^2.4.0",
+    "mariadb": "^2.4.1",
     "memory-cache": "^0.2.0"
-  },
+    },
   "devDependencies": {
     "eslint": "^7.3.1",
     "eslint-config-airbnb-base": "^14.2.0",
