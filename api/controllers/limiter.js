@@ -1,7 +1,7 @@
-const { RateLimiter } = require('limiter');
-const cache = require('memory-cache');
+import limiter from 'limiter';
+import cache from 'memory-cache';
 
-const isLimited = (req, res, next, rate) => {
+export const isLimited = (req, res, next, rate) => {
   if (cache.get(req.ip)) {
     const cachedLimiter = cache.get(req.ip);
     if (cachedLimiter.getTokensRemaining() > 1) {
@@ -11,12 +11,12 @@ const isLimited = (req, res, next, rate) => {
     }
     return res.status(429).send('Too Many Requests');
   }
-  const cachedLimiter = new RateLimiter(rate, 'minute');
+  const cachedLimiter = new limiter.RateLimiter(rate, 'minute');
   cache.put(req.ip, cachedLimiter, 10000);
   return next();
 };
 
-module.exports = {
+export default {
   rate250: (req, res, next) => isLimited(req, res, next, 250),
   rate100: (req, res, next) => isLimited(req, res, next, 100),
 };

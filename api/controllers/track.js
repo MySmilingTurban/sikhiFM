@@ -1,20 +1,22 @@
 // function: multipleTracks
 // if no specified album id, sends all tracks in the database
 // if specified album id, returns all tracks in the given album
-const multipleTracks = async (req, res) => {
+export async function multipleTracks(req, res) {
   let conn;
   let q;
-  const albumid = req.query.albumid;
+  const albumid = parseInt(req.query.albumid, 10);
+  let result;
   try {
     conn = await req.app.locals.pool.getConnection();
-    if(albumid) {
-      q = 'SELECT * FROM `sikhifm_db`.`TrackAlbum` LEFT JOIN `sikhifm_db`.`Track`'+
-       'ON `TrackAlbum`.`Album` = `Track`.`ID` WHERE `TrackAlbum`.`Album` =' + albumid + ';';
+    if (albumid) {
+      q =
+        'SELECT * FROM `TrackAlbum` LEFT JOIN `Track`' +
+        'ON `TrackAlbum`.`Album` = `Track`.`ID` WHERE `Album` = ?';
+      result = await conn.query(q, [albumid]);
+    } else {
+      q = 'SELECT * FROM `Track`;';
+      result = await conn.query(q);
     }
-    else{
-      q = 'SELECT * FROM `sikhifm_db`.`Track`;';
-    }
-    const result = await conn.query(q);
     res.json(result);
     return;
   } catch (err) {
@@ -25,31 +27,17 @@ const multipleTracks = async (req, res) => {
       conn.end();
     }
   }
-};
-
-exports.multipleTracks = multipleTracks;
-
-// function: tracksInAlbumID
-// sends all tracks in a given album by id
-const tracksInAlbumID = async (req, res) => {
-  console.log('tracks in album');
-  res.send("ok");
-  //res.send(req.params.albumid);
-};
-
-exports.tracksInAlbumID = tracksInAlbumID;
+}
 
 // function: byTrackID
 // sends the track with the given id
-const byTrackID = async (req, res) => {
+export async function byTrackID(req, res) {
   let conn;
   const trackID = parseInt(req.params.trackID, 10);
-  console.log(`track id: ${trackID}`);
-
   try {
     conn = await req.app.locals.pool.getConnection();
-    const q = `SELECT * FROM \`sikhifm_db\`.\`Track\` WHERE \`Track\`.\`ID\` = ${trackID};`;
-    const result = await conn.query(q);
+    const q = 'SELECT * FROM `Track` WHERE `Track`.`ID` = ?;';
+    const result = await conn.query(q, [trackID]);
     res.json(result);
     return;
   } catch (err) {
@@ -60,6 +48,4 @@ const byTrackID = async (req, res) => {
       conn.end();
     }
   }
-};
-
-exports.byTrackID = byTrackID;
+}

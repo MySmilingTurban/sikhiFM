@@ -1,10 +1,10 @@
 --album sql query
 
 --basic:
-SELECT * FROM sikhifm_db.Album
-WHERE Parent IS NULL;
+SELECT * FROM `sikhifm_db`.`Album`
+WHERE `Parent` IS NULL;
 
---with join:
+--with join: (not using this yet)
 SELECT * FROM `sikhifm_db`.`Album`
 LEFT JOIN `TrackAlbum` ON `Album`.`ID`=`TrackAlbum`.`Album`
 WHERE `Parent` IS NULL;
