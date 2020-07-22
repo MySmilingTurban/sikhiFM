@@ -6,6 +6,8 @@ import cacheControl from 'express-cache-controller';
 import mariadb from 'mariadb';
 import { config } from './api/config';
 import routes from './api/routes';
+// import swaggerUi from 'swagger-ui-express';
+// import swaggerDoc from './swaggerDoc.json';
 
 // app initialization with express on port 3004 (3005 for development)
 const app = express();
@@ -20,6 +22,7 @@ app.use(cacheControl({ maxAge: 21600 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/v1', routes);
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // sends error 404 message if necessary
 app.use((req, res) => {

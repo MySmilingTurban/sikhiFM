@@ -186,10 +186,10 @@ CREATE TABLE `sikhifm_db`.`TrackLyric` (
 
 INSERT INTO `sikhifm_db`.`Album` (`ID`, `sID`, `Seq`, `Title`, `Parent`, `Art`, `ReleaseDate`, `SmartQuery`, `SmartSubQuery`, `Tags`, `Keywords`, `Artists`, `Created`, `Updated`) VALUES
 ('1', '11', '0', 'Album Title 1', NULL, NULL, '2010-07-11', 'SQ 1', 'SSQ 1', 'Album Tag A, Album Tag Z', 'Album Keyword 1, Album Keyword 3', '[]', '2010-07-11 12:00:00', '2020-06-27 12:00:00'),
-('2', '12', '0', 'Album Title 2', 'Parent 2', NULL, '2020-06-17', 'SQ 2', 'SSQ 2', 'Album Tag A, Album Tag Z', 'Album Keyword 1, Album Keyword 3', '[]', '2020-06-17 12:00:00', '2020-06-26 12:00:00'),
+('2', '12', '0', 'Album Title 2', '1', NULL, '2020-06-17', 'SQ 2', 'SSQ 2', 'Album Tag A, Album Tag Z', 'Album Keyword 1, Album Keyword 3', '[]', '2020-06-17 12:00:00', '2020-06-26 12:00:00'),
 ('3', '13', '0', 'Album Title 3', NULL, NULL, '2020-06-17', 'SQ 3', 'SSQ 3', 'Album Tag C, Album Tag D', 'Album Keyword 2', '[]', '2020-06-17 12:00:00', '2020-06-26 12:00:00'),
-('4', '14', '0', 'Album Title 4', 'Parent 4', NULL, '2020-05-13', 'SQ 4', 'SSQ 4', 'Album Tag A, Album Tag D', 'Album Keyword 7, Album Keyword 1', '[]', '2020-05-13 12:00:00', '2020-06-26 12:00:00'),
-('5', '15', '0', 'Album Title 5', 'Parent 5', NULL, '2020-06-19', 'SQ 5', 'SSQ 5', 'Album Tag C, Album Tag B', 'Album Keyword 3, Album Keyword 4', '[]', '2020-06-19 12:00:00', '2020-06-26 12:00:00');
+('4', '14', '0', 'Album Title 4', '1', NULL, '2020-05-13', 'SQ 4', 'SSQ 4', 'Album Tag A, Album Tag D', 'Album Keyword 7, Album Keyword 1', '[]', '2020-05-13 12:00:00', '2020-06-26 12:00:00'),
+('5', '15', '0', 'Album Title 5', '4', NULL, '2020-06-19', 'SQ 5', 'SSQ 5', 'Album Tag C, Album Tag B', 'Album Keyword 3, Album Keyword 4', '[]', '2020-06-19 12:00:00', '2020-06-26 12:00:00');
 
 INSERT INTO `sikhifm_db`.`Artist` (`ID`, `Prefix`, `Name`, `NameGurmukhi`, `Detail`, `DetailGurmukhi`, `Image`, `ActiveStart`, `ActiveEnd`, `Location`, `Description`, `Tags`, `Keywords`, `Hidden`, `Created`, `Updated`) VALUES
 ('1', 'Name 1', 'AName 1', 'Name Gurmukhi 1', 'Details 1', 'Details Gurmukhi 1', NULL, '2012', '2017', '1', 'Artist Description 1', 'Artist Tag A, Artist Tag Z', 'Artist Keyword 1, Artist Keyword 1.1', '1', '2010-07-11 12:00:00', '2020-06-26 12:00:00'),
