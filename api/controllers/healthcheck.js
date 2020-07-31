@@ -5,7 +5,7 @@
 /**
  * function: healthcheck
  * simple request to see if the service is up and running
- * sele
+
  * @param {Request} req - Express request object
  * @param {Response} res - Express response object
  */

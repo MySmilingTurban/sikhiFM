@@ -1,6 +1,14 @@
 import limiter from 'limiter';
 import cache from 'memory-cache';
 
+/**
+ * function: isLimited
+ * HELP
+ * @param {Request} req - Express request object
+ * @param {Response} res - Express response object
+ * @param {Request} next - Express next object
+ * @param {Integer} rate - number of requests allowed: 100||250
+ */
 export const isLimited = (req, res, next, rate) => {
   if (cache.get(req.ip)) {
     const cachedLimiter = cache.get(req.ip);
