@@ -10,7 +10,10 @@ dotenv.config();
 const app = express();
 
 // creates the pool according to the config
-app.locals.pool = mariadb.createPool(config);
+app.locals.pool = mariadb.createPool({
+    ...config,
+    connectionLimit: 5
+});
 
 app.use(express.json());
 // adds middleware to the app
@@ -25,8 +28,9 @@ app.use((req, res) => {
     res.cacheControl = { noCache: true };
     res.status(404).send({ url: `${req.originalUrl} not found` });
 });
+const port = process.env.PORT || 3000;
 
 app.listen(
-    process.env.PORT,
-    () => console.log(`Server listening on http://localhost:${process.env.PORT}`)
+    port,
+    () => console.log(`Server listening on http://localhost:${port}`)
 )

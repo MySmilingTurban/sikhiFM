@@ -5,7 +5,7 @@ exports.config = {
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    port: process.env.PORT,
+    port: 5001,
 };
 
 
